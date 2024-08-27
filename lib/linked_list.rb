@@ -85,12 +85,16 @@ class LinkedList
     count
   end
 
+  def head
+    @head.value
+  end
+
   def tail
     current = @head
     return nil if current.nil?
 
     current = current.next_node until current.next_node.nil?
-    current
+    current.value
   end
 
   def at(index)
