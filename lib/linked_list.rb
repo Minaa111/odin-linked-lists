@@ -18,10 +18,61 @@ class LinkedList
     end
   end
 
+  def insert_at(value, index)
+    new_node = Node.new(value)
+
+    if index.zero?
+      new_node.next_node = @head
+      @head = new_node
+      return
+    end
+
+    current = @head
+    count = 0
+
+    while current
+      if count == index - 1
+        new_node.next_node = current.next_node
+        current.next_node = new_node
+        return
+      end
+
+      count += 1
+      current = current.next_node
+    end
+  end
+
   def prepend(value)
     new_node = Node.new(value)
     new_node.next_node = @head
     @head = new_node
+  end
+
+  def remove_at(index)
+    return if @head.nil?
+
+    if index.zero?
+      @head = @head.next_node
+      return
+    end
+
+    current = @head
+    count = 0
+
+    while current
+      if count == index - 1
+        if current.next_node.nil?
+          puts 'Index out of bounds'
+          return
+        end
+
+        current.next_node = current.next_node.next_node
+        return
+      end
+
+      count += 1
+      current = current.next_node
+    end
   end
 
   def size
